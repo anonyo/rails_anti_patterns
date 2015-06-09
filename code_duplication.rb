@@ -1,7 +1,16 @@
 # Solution: extract into Modules
-# Ruby modules are designed to centralize behavior among classes, and using them is possibly the simplest way of DRYing up your code. A module is essentially the same as a Ruby class, except that it cannot be instantiated, and it is intended to be included inside other classes or modules. When a class includes a module via include ModuleName, all the methods on that module become instance methods on the class. Although less commonly done, a class can also choose to add a module’s methods as class-level methods by using extend instead of include: extend ModuleName.
+# Ruby modules are designed to centralize behavior among
+# classes, and using them is possibly the simplest way of DRYing up your code. 
+# A module is essentially the same as a Ruby class, except that it cannot be instantiated, 
+# and it is intended to be included inside other classes or modules. 
+# When a class includes a module via include ModuleName, all the methods on that module 
+# become instance methods on the class. Although less commonly done, 
+# a class can also choose to add a module’s methods as class-level methods by using extend instead of include: 
+# extend ModuleName.
 
-# Let’s consider a Ruby on Rails driving game in which two models are defined: Car and Bicycle. Both of these models can accelerate, brake, and turn, and the code for these methods is identical:
+# Let’s consider a Ruby on Rails driving game in 
+# which two models are defined: Car and Bicycle. Both of these models can accelerate, brake, 
+# and turn, and the code for these methods is identical:
 
 
 class Car << ActiveRecord::Base
@@ -79,5 +88,7 @@ end
 
 # pushing validtion to modules
 
-#You can push the validation into the module as well, by making use of the ActiveSupport::Concern module. This provides a method named included that will be run when the module is included in a Ruby class.
-#This hook lets you make use of the Active Record validation macros, which are not available for you to use when the module is defined. The included method on Drivable now opens the class that included the module and calls the validation method there:
+#You can push the validation into the module as well, by making use of the ActiveSupport::Concern module. 
+# This provides a method named included that will be run when the module is included in a Ruby class.
+# This hook lets you make use of the Active Record validation macros, 
+# which are not available for you to use when the module is defined. 
