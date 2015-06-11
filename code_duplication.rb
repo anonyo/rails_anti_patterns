@@ -70,6 +70,29 @@ class Car << ActiveRecord::Base
   # other car methods...
 end
 
+# car and bicyle may different accelaration and top speed.
+# extract them to a methods in bicyle/car classes
+def acceralation
+  50 # bike could be 10
+end
+
+def accelerate
+  self.speed = speed + acceralation
+end
+
+# A few things to consider: the module is dependate on those methods. Template error
+# can be raised if they are not present.
+
+module Drivable
+extend ActiveSupport::Concern
+class TemplateError < RuntimeError; end
+  def acceleration
+    raise TemplateError, "The Drivable module requires the " +
+                         "including class to define an " +
+                         "acceleration method"
+  end
+end
+
 # Loading the modules under lib
 
 #config/initializers/requires.rb
@@ -81,3 +104,4 @@ end
 
 #You can push the validation into the module as well, by making use of the ActiveSupport::Concern module. This provides a method named included that will be run when the module is included in a Ruby class.
 #This hook lets you make use of the Active Record validation macros, which are not available for you to use when the module is defined. The included method on Drivable now opens the class that included the module and calls the validation method there:
+
