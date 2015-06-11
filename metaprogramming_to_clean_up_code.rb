@@ -97,4 +97,10 @@ end
 class Purchase < ActiveRecord::Base
   has_statuses :in_progress, :submitted,
                :approved, :shipped, :received
+  # combines statuses
+  scope :all_not_shipped, where(:status => ["partially_shipped", "fully_shipped"]
+
+  def not_shipped?
+    !(partially_shipped? or fully_shipped?)
+  end
 end
